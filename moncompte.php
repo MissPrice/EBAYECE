@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,15 +39,17 @@
 
 
 
-
-
-
-
-
 		.row{
 			background: #ffffff;
+			position: center;
+			padding: 10px 0 100px;
 			border: 1px solid #333;
 		}
+
+
+
+
+		
 
 		.header {
 			/*background-image: url('background.jpg');
@@ -72,7 +75,7 @@
 			text-align: center;
 		}
 		.description h1 {
-			color: #6ab446;
+			color: #33aaff;
 		}
 		.description p {
 			color: #fff;
@@ -140,9 +143,11 @@
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -151,6 +156,28 @@
 	</script>
 </head>
 <body>
+
+
+<?php
+session_start();
+
+if (!isset($_SESSION['UserId'])) {
+		$_SESSION['msg'] = "You have to log in first";
+		//header('location: connection.php');
+	}
+
+if (isset($_GET['logout'])) {
+		session_destroy();
+		unset($_SESSION['UserId']);
+		//header("location: connection.php");
+	}
+
+
+
+?>
+
+
+
 	<nav class="navbar navbar-expand-md">
 		<a class="navbar-brand" href="accueil.php">Logo</a>
 		<button class="navbar-toggler navbar-dark" type="button"
@@ -175,50 +202,37 @@
 
 
 	<header class="page-header header container-fluid">
-		<br>
-		<h1>Catégorie</h1>
-        <form action="afficheritems.php" method="post">
-		<div class="container features">
+		<div class="overlay"></div>
+		<div class="description">
 			<div class="row">
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type="submit" name="C1" value ="Ferraille ou trésor">
-						</p>
-					</a>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type ="submit" name="C2" value="Bon pour le musée">
-						</p>
-					</a>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type="submit" name="C3" value="Accessoire VIP">
-						</p>
-					</a>
-				</div>
-			</div>
+				<form action="connection.php" method="post">
+		            <input type="submit" name="button1" value="Login">
+		        </form>
+		        <form action="livraison.php" method="post">
+		            <input type="submit" name="button2" value="Livraison">
+		        </form>
+		        <form action="paiements.php" method="post">
+		            <input type="submit" name="button3" value="Paiement">
+		        </form>
+		        <form action="vendre.php" method="post">
+		            <input type="submit" name="button4" value="Vendre">
+		        </form>
+		        <form action="categorie.html" method="post">
+		            <input type="submit" name="button5" value="Categories">
+		        </form>
+		        <br>
+		        <?php  if (isset($_SESSION['UserId'])) : ?> 
+		            <p> 
+		                Welcome  
+		                <strong> 
+		                    <?php echo $_SESSION['UserId']; ?>
+		                    <p> <a href="moncompte.php?logout='1'" style="color: red;">Click here to Logout</a> </p>
+		                </strong> 
+		            </p> 
+		        <?php endif ?> 
+		    </div>
 		</div>
-        </form>
-		<br>
-
 	</header>
-
-
-	
-
-
-
-
-
-
 
 
 

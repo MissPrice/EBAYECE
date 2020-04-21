@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,13 +41,16 @@
 
 
 
-
-
-
 		.row{
 			background: #ffffff;
+			position: center;
+			padding: 30px 0 100px;
+			margin: 25px;
 			border: 1px solid #333;
 		}
+
+
+		
 
 		.header {
 			/*background-image: url('background.jpg');
@@ -56,14 +60,6 @@
 			background: #CCD3D7;
 
 		}
-		/*overlay {
-			position: absolute;
-			min-height: 100%;
-			min-width: 100%;
-			left: 0px;
-			top: 0px;
-			background-color: rgba(0, 0, 0, 0.4);
-		}*/
 		.description {
 			left: 50%;
 			position: absolute;
@@ -72,24 +68,15 @@
 			text-align: center;
 		}
 		.description h1 {
-			color: #6ab446;
+			color: #33aaff;
+			background: #ffffff;
 		}
 		.description p {
 			color: #fff;
 			font-size: 1.3rem;
 			line-height: 1.5;
 		}
-		.description button {
-			border:1px solid #6ab446;
-			background-color: #6ab446;
-			border-radius: 0;
-			color: #fff;
-		}
-		.description button:hover {
-			border:1px solid #fff;
-			background-color: #fff;
-			color: #000;
-		}
+		
 		.features {
 			margin: 4em auto;
 			padding: 1em;
@@ -140,9 +127,11 @@
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -175,50 +164,38 @@
 
 
 	<header class="page-header header container-fluid">
-		<br>
-		<h1>Catégorie</h1>
-        <form action="afficheritems.php" method="post">
-		<div class="container features">
+		<div class="description">
 			<div class="row">
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type="submit" name="C1" value ="Ferraille ou trésor">
-						</p>
-					</a>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type ="submit" name="C2" value="Bon pour le musée">
-						</p>
-					</a>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type="submit" name="C3" value="Accessoire VIP">
-						</p>
-					</a>
-				</div>
+				<div class="col-lg-4 col-md-4 col-sm-12">
+					<h1>S'inscrire!</h1>
+					<br>
+                    <form action="inscription.php" method="post">
+					<table>
+			            <tr>
+			                <td>Mail:</td>
+			                <td><input type="text" name="Login"></td>
+			            </tr>
+			            <tr>
+			                <td>Mot de passe:</td>
+			                <td><input type="password" name="PasswordA"></td>
+			            </tr>
+			            <tr>
+			                <td>Confirmer mot de passe:</td>
+			                <td><input type="password" name="PasswordB"></td>
+			            </tr>
+			            <tr>
+			            	<br>
+			                <td colspan="2" align="center">
+								<input type="submit" name="signin_button" value="Valider">
+			             	</td>
+			            </tr>
+                        
+			        </table>
+                    </form>
+			    </div>
 			</div>
 		</div>
-        </form>
-		<br>
-
 	</header>
-
-
-	
-
-
-
-
-
-
 
 
 

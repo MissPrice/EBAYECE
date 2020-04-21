@@ -1,3 +1,17 @@
+<?php
+	$database = "bdd";
+
+	$db_handle = mysqli_connect('localhost','root','');
+	$db_found = mysqli_select_db($db_handle, $database);
+
+	$sql = "SELECT * FROM produit";
+	$result = mysqli_query($db_handle, $sql);
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,40 +189,54 @@
 
 
 	<header class="page-header header container-fluid">
+		<div class="overlay"></div>
 		<br>
-		<h1>Catégorie</h1>
-        <form action="afficheritems.php" method="post">
+		<h1>Actualité</h1>
 		<div class="container features">
 			<div class="row">
+<?php while($data = mysqli_fetch_assoc($result)) { ?>
 				<div class="col-lg-2 col-md-2 col-sm-12">
+
 					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type="submit" name="C1" value ="Ferraille ou trésor">
-						</p>
+						<img src="imagesuploadedf\<?php echo $data['NomImage']; ?>" class="img-fluid">
 					</a>
+					<p>
+						<?php echo $data['NomProduit'];?>
+					</p>
+
 				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type ="submit" name="C2" value="Bon pour le musée">
-						</p>
-					</a>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type="submit" name="C3" value="Accessoire VIP">
-						</p>
-					</a>
-				</div>
+<?php }
+?>
 			</div>
 		</div>
-        </form>
 		<br>
 
+
+<?php
+$sql = "SELECT * FROM produit";
+$result = mysqli_query($db_handle, $sql);
+?>
+
+
+
+		<h1>Offres du jour</h1>
+		<div class="container features">
+			<div class="row">
+<?php while($data = mysqli_fetch_assoc($result)) { ?>
+				<div class="col-lg-2 col-md-2 col-sm-12">
+
+					<a href="#">
+						<img src="imagesuploadedf\<?php echo $data['NomImage']; ?>" class="img-fluid">
+					</a>
+					<p>
+						<?php echo $data['NomProduit'];?>
+					</p>
+
+				</div>
+<?php }
+?>
+			</div>
+		</div>
 	</header>
 
 

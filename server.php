@@ -1,6 +1,7 @@
 <?php
-
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 //init
 $DispId = NULL;
@@ -69,12 +70,12 @@ $Password = isset($_POST["Password"])? $_POST["Password"] : "";
             $_SESSION['UserId'] = $DispId;
             // Welcome message 
             $_SESSION['success'] = "login successful"; 
-             echo "<br>";
+             /*echo "<br>";
              echo "IdClient = $DispId <br>";
              echo "Mail = $DispMail <br>";
              echo "Mdp = $DispPassword <br>";
-             echo "Niveau = $DispNiveau <br>";
-            header('location: index.php');
+             echo "Niveau = $DispNiveau <br>";*/
+            header('location: accueil.php');
         }
     }
 }
@@ -103,7 +104,7 @@ $PasswordB = isset($_POST["PasswordB"])? $_POST["PasswordB"] : "";
             //le client correspondant n'existe pas
             $sql = "INSERT INTO login(Login,Mdp)VALUES('$Login','$PasswordA')";
             $result = mysqli_query($db_handle, $sql);
-            echo "Add successful. <br>";
+            //echo "Add successful. <br>";
             while ($data = mysqli_fetch_assoc($result))
             {
                 $DispId = $data['IdLogin'];
@@ -111,7 +112,7 @@ $PasswordB = isset($_POST["PasswordB"])? $_POST["PasswordB"] : "";
                 $DispPassword = $data['Mdp'];
                 $DispNiveau = $data['Niveau'];
                 $_SESSION['UserId'] = $DispId;
-                header('location: index.php');
+                header('location: accueil.php');
                 
             }
         }
@@ -160,7 +161,7 @@ $Adresse = isset($_POST["Adresse"])? $_POST["Adresse"] : "";
             $sql = "INSERT INTO livraison(IdLogin,Nom,Prenom,Adresse)VALUES($DispId,'$Nom','$Prenom','$Adresse')";
             $result = mysqli_query($db_handle, $sql);
             echo "Add successful UserId = $DispId<br>";
-            header('location: index.php');
+            header('location: accueil.php');
         }
             else
             {
@@ -218,7 +219,7 @@ $Type= isset($_POST["Type"])?$_POST["Type"] : "";
              echo "Nom Prenom = $DispNomPrenom <br>";
              echo "Date Exp = $DispDateExp <br>";
              echo "CCV = $DispCode <br>";
-             header('location: index.php');
+             header('location: accueil.php');
             }
     }
     else
@@ -233,14 +234,24 @@ $Type= isset($_POST["Type"])?$_POST["Type"] : "";
 if (isset($_POST["additem_button"])){
     
     //recuperer les données venant de la page HTML
-$Photo = isset($_POST["Photo"])? $_POST["Photo"] : "";
 $Nom = isset($_POST["Nom"])? $_POST["Nom"] : "";
 $Description = isset($_POST["Description"])? $_POST["Description"] : "";
-$Video = isset($_POST["Video"])? $_POST["Video"] : "";
 $Prix = isset($_POST["Prix"])? $_POST["Prix"] : "";
 $Categorie = isset($_POST["Categorie"])?$_POST["Categorie"] : "";
-
-//init
+$NomPhoto = basename($_FILES['imagefile']['name']);
+$targetdir = "imagesuploadedf/";
+$targetfile = $targetdir . basename($_FILES['imagefile']['name']);
+    
+// Select file type
+$imageFileType = strtolower(pathinfo($targetfile,PATHINFO_EXTENSION));
+    
+// Valid file extensions
+$extensionsarr = array("jpg","jpeg","png","gif"); 
+if(in_array($imageFileType,$extensionsarr))
+            {
+move_uploaded_file($_FILES['imagefile']['tmp_name'],$targetdir.$NomPhoto);
+}    
+    //init
 /*
 $DispId = $_SESSION['VendeurId'];
 */
@@ -259,11 +270,14 @@ $DispId = $_SESSION['UserId'];
         //tester s'il y a de résultat
         if (mysqli_num_rows($result) == 0)
         {
+            
             //le client correspondant n'existe pas
-            $sql = "INSERT INTO item(Nom,Photo,Description,Video,Prix,Categorie,IdVendeur)VALUES('$Nom','$Photo','$Description','$Video','$Prix','$Categorie',$DispId)";
+            $sql = "INSERT INTO item(Nom,Photo,Description,Prix,Categorie,IdVendeur)VALUES('$Nom','$NomPhoto','$Description','$Prix','$Categorie','$DispId')";
             $result = mysqli_query($db_handle, $sql);
             echo "Add successful Item : $Nom<br>";
-        }
+            echo "Nom photo = $NomPhoto <br>";
+            header('location: accueil.php');
+            }
             else
             {
                 echo "Paiement infos for Item = $Nom <br>";
@@ -271,19 +285,15 @@ $DispId = $_SESSION['UserId'];
             {
                 $Categorie = $data['Categorie'];
                 $Nom = $data['Nom'];
-                $Photo = $data['Photo'];
                 $Description = $data['Description'];
-                $Video = $data['Video'];
                 $Prix = $data['Prix'];
             }
              echo "Categorie = $Categorie <br>";
              echo "Nom = $Nom <br>";
-             echo "Photo = $Photo <br>";
              echo "Description = $Description <br>";
-             echo "Video = $Video <br>";
              echo "Prix = $Prix <br>";
              echo "Vendeur = $DispId <br>";
-             header('location: index.php');
+             header('location: accueil.php');
             }
     }
     else

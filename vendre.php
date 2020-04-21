@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,14 +40,16 @@
 
 
 
-
-
-
-
 		.row{
 			background: #ffffff;
+			position: center;
+			padding: 50px 0 100px;
 			border: 1px solid #333;
 		}
+
+
+
+		
 
 		.header {
 			/*background-image: url('background.jpg');
@@ -72,7 +75,7 @@
 			text-align: center;
 		}
 		.description h1 {
-			color: #6ab446;
+			color: #33aaff;
 		}
 		.description p {
 			color: #fff;
@@ -140,9 +143,11 @@
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -175,54 +180,54 @@
 
 
 	<header class="page-header header container-fluid">
-		<br>
-		<h1>Catégorie</h1>
-        <form action="afficheritems.php" method="post">
-		<div class="container features">
+		<div class="overlay"></div>
+		<div class="description">
 			<div class="row">
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type="submit" name="C1" value ="Ferraille ou trésor">
-						</p>
-					</a>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type ="submit" name="C2" value="Bon pour le musée">
-						</p>
-					</a>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12">
-					<a href="#">
-						<img src="imagesuploadedf\kratos_avatar.jpg" class="img-fluid">
-						<p>
-							<input type="submit" name="C3" value="Accessoire VIP">
-						</p>
-					</a>
-				</div>
+				<h1>Remplissez ce formulaire pour votre produit.</h1>
+				<br>
+                <form method="post" action="vendre.php" enctype='multipart/form-data'>
+				<table>
+		            <tr>
+		                <td>Nom:</td>
+		                <td><input type="text" name="Nom"></td>
+		            </tr>
+		            <tr>
+		                <td>Description:</td>
+		                <td><input type="text" name="Description"></td>
+		            </tr>
+		            <tr>
+		                <td>Prix:</td>
+		                <td><input type="number" name="Prix"></td>
+		            </tr>
+		            <tr>
+		                <td>Categorie:</td>
+		                <td><FORM>
+							<SELECT name="Categorie" size="1">
+							<OPTION>Choisir une des options suivantes</OPTION>
+							<OPTION value = "1">Ferraille ou Trésor</OPTION>
+							<OPTION value = "2">Bon pour le Musée</OPTION>
+							<OPTION value = "3">Accessoire VIP</OPTION>
+                            </SELECT>
+							</FORM>
+						</td>
+		            </tr>
+		            <tr>
+		                <td>Video:</td>
+		                <td><input type="file" name="videofile"></td>
+		            </tr>
+		            <tr>
+		            	<td>Photo:</td>
+		                <td><input type="file" name="imagefile"></td>
+		            </tr>
+                    <tr>
+		                <td>Valider:</td>
+		                <td><input type="submit" name="additem_button" value="Valider"></td>
+		            </tr>
+		        </table>
+                </form>
 			</div>
 		</div>
-        </form>
-		<br>
-
 	</header>
-
-
-	
-
-
-
-
-
-
-
-
-
-	
 
 
 
